@@ -21,20 +21,12 @@ public class SpiderProceduralAnimation : MonoBehaviour {
     private bool bodyOrientation = true;
     [SerializeField]
     private float raycastRange = 1.5f;
-    [SerializeField] 
-    private float movingLegsMax;
-    
-    [SerializeField]
-    private Transform[] group1;
-    [SerializeField]
-    private Transform[] group2;
     
     private Vector3[] defaultLegPositions;
     private Vector3[] lastLegPositions;
     private Vector3 lastBodyUp;
     private bool[] legMoving;
     private int legsNumber;
-    private int movingLegsNumber = 0;
 
     private int groupToMove = 0;
     private bool group1Moving;
@@ -63,8 +55,6 @@ public class SpiderProceduralAnimation : MonoBehaviour {
     private void FixedUpdate() {
         CalculateVelocity();
 
-        // MoveLegs();
-        // MoveLegsFixed();
         MoveGroupedLegs();
 
         // Debug.Log("Step sizes = " +String.Join("",
@@ -89,21 +79,11 @@ public class SpiderProceduralAnimation : MonoBehaviour {
         }
     }
 
-    private bool IsFirstGroupMoving()
-    {
-        return legMoving[0] && legMoving[1] && legMoving[2] && legMoving[3];
-    }
-    
     private bool IsFirstGroupNotMoving()
     {
         return !legMoving[0] && !legMoving[1] && !legMoving[2] && !legMoving[3];
     }
-    
-    private bool IsSecondGroupMoving()
-    {
-        return legMoving[4] && legMoving[5] && legMoving[6] && legMoving[7];
-    }
-    
+
     private bool IsSecondGroupNotMoving()
     {
         return !legMoving[4] && !legMoving[5] && !legMoving[6] && !legMoving[7];
@@ -126,36 +106,16 @@ public class SpiderProceduralAnimation : MonoBehaviour {
                 groupToMove = 0;
             }
         }
-        else if (IsFirstGroupNotMoving())
+
+        for (int i = 0; i < 8; i++)
         {
-            for (int i = 0; i < 4; i++)
-            {
-                legTargets[i].position = lastLegPositions[i];
-            }
-        }
-        else if (IsSecondGroupNotMoving())
-        {
-            for (int i = 4; i < 8; i++)
+            if (!legMoving[i])
             {
                 legTargets[i].position = lastLegPositions[i];
             }
         }
         
         lastBodyPos = transform.position;
-
-        // if (IsFirstGroupMoving() && !IsSecondGroupMoving())
-        // {
-        //     Debug.Log("FIRST MOVING");
-        // }
-        // else if (IsSecondGroupMoving() && !IsFirstGroupMoving())
-        // {
-        //     Debug.Log("SECOND MOVING");
-        // }
-        //
-        // if (IsFirstGroupMoving() && IsSecondGroupMoving())
-        // {
-        //     throw new Exception("BOTH MOVING WTF");
-        // }
     }
 
     private void MoveLegs(int from, int to)
@@ -168,8 +128,6 @@ public class SpiderProceduralAnimation : MonoBehaviour {
                 transform.up
             ).magnitude;
 
-            // bool otherGroupNotMoving = groupToMove == 0 ? IsSecondGroupNotMoving() : IsFirstGroupNotMoving();
-            
             if (!legMoving[i] && distance > stepSize)
             {
                 MoveLeg(i, desiredPosition);   
@@ -179,40 +137,6 @@ public class SpiderProceduralAnimation : MonoBehaviour {
                 legTargets[i].position = lastLegPositions[i];
             }
         }
-    }
-
-    private void MoveLegsFixed()
-    {
-        // Паука качает скорее всего из-за того, что меняется центр масс. Нужно как-то синхронизовать движение ног
-        // (не, я ошибался, я вообще без понятия, из-за чего это)
-        // аа, точно, я же FixBodyOrientation не трогал даже
-        Vector3[] desiredPositions = new Vector3[legsNumber];
-        for (int i = 0; i < legsNumber; i++) {
-            desiredPositions[i] = transform.TransformPoint(defaultLegPositions[i]);
-            float distance = Vector3.ProjectOnPlane(
-                desiredPositions[i] + velocity * velocityMultiplier - lastLegPositions[i],
-                transform.up
-            ).magnitude;
-            // Debug.Log(i + "," + stepSizes.Length);
-            // if (i < stepSizes.Length && distance > stepSizes[i]) {
-            //     if (!legMoving[i] && movingLegsNumber <= movingLegsMax)
-            //     {
-            //         MoveLeg(i, desiredPositions[i]);
-            //     }
-            // }
-            if (i < stepSizes.Length && distance > stepSize) {
-                if (!legMoving[i] && movingLegsNumber <= movingLegsMax)
-                {
-                    MoveLeg(i, desiredPositions[i]);
-                }
-            }
-            else
-            {
-                legTargets[i].position = lastLegPositions[i];
-            }
-        }
-
-        lastBodyPos = transform.position;
     }
 
     private void MoveLegs()
@@ -264,7 +188,6 @@ public class SpiderProceduralAnimation : MonoBehaviour {
             (transform.parent.up + velocity * 75).normalized);
             
         legMoving[indexToMove] = true;
-        movingLegsNumber++;
             
         if (positionAndNormalForward[1] != Vector3.zero) {
             StartCoroutine(PerformStep(indexToMove, positionAndNormalForward[0]));
@@ -299,18 +222,13 @@ public class SpiderProceduralAnimation : MonoBehaviour {
         }
         legTargets[index].position = targetPoint;
         lastLegPositions[index] = legTargets[index].position;
-        // if (index == 0)
-        // {
-        //     Debug.Log("ZERO");
-        // }
         legMoving[index] = false;
-        movingLegsNumber--;
     }
 
     private void FixBodyOrientation() {
         if (legsNumber > 3 && bodyOrientation) {
-            Vector3 v1 = legTargets[0].position - legTargets[1].position;
-            Vector3 v2 = legTargets[2].position - legTargets[3].position;
+            Vector3 v1 = legTargets[0].position - legTargets[2].position;
+            Vector3 v2 = legTargets[4].position - legTargets[7].position;
             Vector3 normal = Vector3.Cross(v1, v2).normalized;
             Vector3 up = Vector3.Lerp(lastBodyUp, normal, 1f / (smoothness + 1));
             transform.up = up;
