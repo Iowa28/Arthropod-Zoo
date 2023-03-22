@@ -229,7 +229,7 @@ public class ArthropodLegsAnimation : MonoBehaviour {
     private void OnDrawGizmosSelected()
     {
         const float legRadius = .05f; 
-        for (int i = 0; i < legsNumber; ++i) {
+        for (int i = 0; i < legsNumber; i++) {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(legTargets[i].position, legRadius);
             Gizmos.color = Color.green;
