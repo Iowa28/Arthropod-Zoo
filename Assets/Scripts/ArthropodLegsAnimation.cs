@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections;
 using UnityEngine;
 
-public class SpiderProceduralAnimation : MonoBehaviour {
+public class ArthropodLegsAnimation : MonoBehaviour {
     [SerializeField]
     private Transform[] legTargets;
-    [SerializeField] 
-    private double[] stepSizes;
     [SerializeField]
     private float stepSize = 0.15f;
     [SerializeField]
@@ -21,6 +16,8 @@ public class SpiderProceduralAnimation : MonoBehaviour {
     private bool bodyOrientation = true;
     [SerializeField]
     private float raycastRange = 1.5f;
+    [SerializeField]
+    private Vector3 defaultLegOffset;
     
     private Vector3[] defaultLegPositions;
     private Vector3[] lastLegPositions;
@@ -28,14 +25,14 @@ public class SpiderProceduralAnimation : MonoBehaviour {
     private bool[] legMoving;
     private int legsNumber;
 
-    private int groupToMove = 0;
+    private int groupToMove;
     private bool group1Moving;
     private bool group2Moving;
     
     private Vector3 velocity;
     private Vector3 lastVelocity;
     private Vector3 lastBodyPos;
-    private readonly float velocityMultiplier = 30f;
+    private const float velocityMultiplier = 30f;
 
     private void Start() {
         lastBodyUp = transform.up;
@@ -57,12 +54,10 @@ public class SpiderProceduralAnimation : MonoBehaviour {
 
         MoveGroupedLegs();
 
-        // Debug.Log("Step sizes = " +String.Join("",
-        //     new List<double>(stepSizes)
-        //         .ConvertAll(i => i.ToString(CultureInfo.InvariantCulture))
-        //         .ToArray()));
-
-        FixBodyOrientation();
+        if (bodyOrientation && legsNumber == 8)
+        {
+            FixBodyOrientation();   
+        }
     }
 
     private void CalculateVelocity() {
@@ -81,12 +76,26 @@ public class SpiderProceduralAnimation : MonoBehaviour {
 
     private bool IsFirstGroupNotMoving()
     {
-        return !legMoving[0] && !legMoving[1] && !legMoving[2] && !legMoving[3];
+        bool groupNotMoving = !legMoving[0];
+        
+        for (int i = 1; i < legsNumber / 2; i++)
+        {
+            groupNotMoving = groupNotMoving && !legMoving[i];
+        }
+
+        return groupNotMoving;
     }
 
     private bool IsSecondGroupNotMoving()
     {
-        return !legMoving[4] && !legMoving[5] && !legMoving[6] && !legMoving[7];
+        bool groupNotMoving = !legMoving[legsNumber / 2];
+        
+        for (int i = legsNumber / 2 + 1; i < legsNumber; i++)
+        {
+            groupNotMoving = groupNotMoving && !legMoving[i];
+        }
+
+        return groupNotMoving;
     }
 
     private void MoveGroupedLegs()
@@ -95,23 +104,23 @@ public class SpiderProceduralAnimation : MonoBehaviour {
         {
             if (groupToMove == 0)
             {
-                MoveLegs(0, 4);
+                MoveLegs(0, legsNumber / 2);
 
                 groupToMove = 1;
             }
             else if (groupToMove == 1)
             {
-                MoveLegs(4, 8);
-
+                MoveLegs(legsNumber / 2, legsNumber);
+                
                 groupToMove = 0;
             }
         }
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < legsNumber; i++)
         {
             if (!legMoving[i])
             {
-                legTargets[i].position = lastLegPositions[i];
+                legTargets[i].position = lastLegPositions[i] + defaultLegOffset;
             }
         }
         
@@ -137,39 +146,6 @@ public class SpiderProceduralAnimation : MonoBehaviour {
                 legTargets[i].position = lastLegPositions[i];
             }
         }
-    }
-
-    private void MoveLegs()
-    {
-        // ищется нога, которая расположена от своего дефотного положения дальше всего
-        Vector3[] desiredPositions = new Vector3[legsNumber];
-        int indexToMove = -1;
-        float maxDistance = stepSize;
-        for (int i = 0; i < legsNumber; i++) {
-            desiredPositions[i] = transform.TransformPoint(defaultLegPositions[i]);
-            float distance = Vector3.ProjectOnPlane(
-                desiredPositions[i] + velocity * velocityMultiplier - lastLegPositions[i],
-                transform.up
-                ).magnitude;
-            if (distance > maxDistance) {
-                maxDistance = distance;
-                indexToMove = i;
-            }
-        }
-
-        // остальные ноги сохраняют свое положение
-        for (int i = 0; i < legsNumber; ++i) {
-            if (i != indexToMove) {
-                legTargets[i].position = lastLegPositions[i];
-            }
-        }
-
-        // если выбранная нога не движется, то двигаем
-        if (indexToMove != -1 && !legMoving[indexToMove]) {
-            MoveLeg(indexToMove, desiredPositions[indexToMove]);
-        }
-
-        lastBodyPos = transform.position;
     }
 
     private void MoveLeg(int indexToMove, Vector3 desiredPosition)
@@ -225,10 +201,23 @@ public class SpiderProceduralAnimation : MonoBehaviour {
         legMoving[index] = false;
     }
 
-    private void FixBodyOrientation() {
-        if (legsNumber > 3 && bodyOrientation) {
-            Vector3 v1 = legTargets[0].position - legTargets[2].position;
-            Vector3 v2 = legTargets[4].position - legTargets[7].position;
+    private void FixBodyOrientation()
+    {
+        Vector3 v1 = default, v2 = default;
+        
+        if (legsNumber / 2 == 4) 
+        {
+            v1 = legTargets[0].position - legTargets[3].position;
+            v2 = legTargets[4].position - legTargets[7].position;
+        }
+        else if (legsNumber / 2 == 3)
+        {
+            v1 = legTargets[0].position - legTargets[2].position;
+            v2 = legTargets[3].position - legTargets[5].position;
+        }
+
+        if (v1 != default && v2 != default)
+        {
             Vector3 normal = Vector3.Cross(v1, v2).normalized;
             Vector3 up = Vector3.Lerp(lastBodyUp, normal, 1f / (smoothness + 1));
             transform.up = up;
@@ -237,13 +226,14 @@ public class SpiderProceduralAnimation : MonoBehaviour {
         }
     }
 
-    private void OnDrawGizmosSelected() {
+    private void OnDrawGizmosSelected()
+    {
+        const float legRadius = .05f; 
         for (int i = 0; i < legsNumber; ++i) {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(legTargets[i].position, 0.05f);
+            Gizmos.DrawWireSphere(legTargets[i].position, legRadius);
             Gizmos.color = Color.green;
-            // Gizmos.DrawWireSphere(transform.TransformPoint(defaultLegPositions[i]), stepSize);
-            Gizmos.DrawWireSphere(transform.TransformPoint(defaultLegPositions[i]), (float) stepSizes[i]);
+            Gizmos.DrawWireSphere(transform.TransformPoint(defaultLegPositions[i]), stepSize);
         }
     }
 }

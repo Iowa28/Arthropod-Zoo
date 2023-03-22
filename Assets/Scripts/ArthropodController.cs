@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpiderController : MonoBehaviour {
+public class ArthropodController : MonoBehaviour {
     [SerializeField]
     private float speed = 3f;
     [SerializeField]
@@ -140,41 +140,5 @@ public class SpiderController : MonoBehaviour {
             transform.position - (direction + largener) * halfRange + largener.normalized * offset / 100f, 
             direction);
         return ray;
-    }
-
-    private Vector3[] GetClosestPoint(float halfRange) {
-        Vector3[] res = { transform.position, transform.up };
-        float normalAmount = 1f;
-        float positionAmount = 1f;
-    
-        Vector3[] dirs = CalculateRayDirections();
-    
-        foreach (Vector3 dir in dirs) {
-            RaycastHit hit;
-            Vector3 larger = Vector3.ProjectOnPlane(dir, transform.up);
-            Ray ray = new Ray(
-                transform.position - (dir + larger) * halfRange + larger.normalized * innerRaysOffset / 100f, 
-                dir);
-            Debug.DrawRay(ray.origin, ray.direction);
-            if (Physics.SphereCast(ray, 0.01f, out hit, 2f * halfRange)) {
-                res[0] += hit.point;
-                res[1] += hit.normal;
-                normalAmount += 1;
-                positionAmount += 1;
-            }
-            ray = new Ray(
-                transform.position - (dir + larger) * halfRange + larger.normalized * outerRaysOffset / 100f, 
-                dir);
-            Debug.DrawRay(ray.origin, ray.direction, Color.green);
-            if (Physics.SphereCast(ray, 0.01f, out hit, 2f * halfRange)) {
-                res[0] += hit.point;
-                res[1] += hit.normal;
-                normalAmount   += 1;
-                positionAmount += 1;
-            }
-        }
-        res[0] /= positionAmount;
-        res[1] /= normalAmount;
-        return res;
     }
 }
