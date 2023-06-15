@@ -52,22 +52,22 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\MeshViews\SharedVertexView.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\SelectionDebug.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\MeshViews\VertexView.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\CommandPalette.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\MeshViews\EdgeView.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\GenerateMenuItems.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\GenerateDesaturatedImage.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\MeshViews\FaceView.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\EditorPrefViewer.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\ResourceExplorer.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\MeshViewer.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\MeshInfo.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\MeshViews\VertexView.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\GenerateDesaturatedImage.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\ShiftDuplicate.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\RegisterDebugDefines.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\ResourceExplorer.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\MeshViews\PositionView.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\DebugEditor.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\MeshInfo.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\MeshViews\SharedVertexView.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\CommandPalette.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\GenerateMenuItems.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\EditorPrefViewer.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\Guides.cs" />
      <None Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Editor\Unity.ProBuilder.Debug.Editor.asmdef" />
  <Reference Include="UnityEngine">

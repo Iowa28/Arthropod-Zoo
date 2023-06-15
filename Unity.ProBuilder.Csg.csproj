@@ -52,15 +52,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\Vertex.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\Model.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\CSG.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\Polygon.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\Plane.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\VertexUtility.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\VertexAttributes.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\AssemblyInfo.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\Vertex.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\Polygon.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\Plane.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\Node.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Classes\VertexUtility.cs" />
      <None Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\CSG\Unity.ProBuilder.Csg.asmdef" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

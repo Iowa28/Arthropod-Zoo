@@ -52,18 +52,18 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\NearestNeighbourList.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\AssemblyInfo.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\PriorityQueue.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\HyperRect.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\IKdTree.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\Math\TypeMath.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\Math\FloatMath.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\IPriorityQueue.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\Math\ITypeMath.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\AssemblyInfo.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\KdTree.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\PriorityQueue.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\HyperRect.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\KdTreeNode.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\IKdTree.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\Math\DoubleMath.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\NearestNeighbourList.cs" />
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\KdTreeLib\Math\TypeMath.cs" />
      <None Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\External\KdTree\Unity.ProBuilder.KdTree.asmdef" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

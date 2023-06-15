@@ -52,8 +52,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Scripts\Teleport.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Scripts\ClickDuplicate.cs" />
+     <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Scripts\Teleport.cs" />
      <Compile Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Scripts\ShowHoveredInfo.cs" />
      <None Include="C:\Users\naminov\Documents\Unity-Packages\com.unity.probuilder-master\Debug\Scripts\UnityEngine.ProBuilder.Debug.asmdef" />
  <Reference Include="UnityEngine">

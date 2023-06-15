@@ -61,7 +61,6 @@ public class ArthropodLegsAnimation : MonoBehaviour {
     }
 
     private void CalculateVelocity() {
-        // вычисляем вектор движения тела паука
         velocity = transform.position - lastBodyPos;
         velocity = (velocity + smoothness * lastVelocity) / (smoothness + 1f);
 
@@ -150,7 +149,6 @@ public class ArthropodLegsAnimation : MonoBehaviour {
 
     private void MoveLeg(int indexToMove, Vector3 desiredPosition)
     {
-        // вычисление точки, в которую нога должна переместиться 
         Vector3 targetPoint = desiredPosition + Mathf.Clamp(velocity.magnitude * velocityMultiplier, 0.0f, 1.5f) * (desiredPosition - legTargets[indexToMove].position);
         targetPoint += velocity * velocityMultiplier;
             
@@ -165,7 +163,7 @@ public class ArthropodLegsAnimation : MonoBehaviour {
             
         legMoving[indexToMove] = true;
             
-        if (positionAndNormalForward[1] != Vector3.zero) {
+        if (positionAndNormalForward[indexToMove] != Vector3.zero) {
             StartCoroutine(PerformStep(indexToMove, positionAndNormalForward[0]));
         }
         else {

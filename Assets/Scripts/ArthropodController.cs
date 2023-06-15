@@ -29,9 +29,7 @@ public class ArthropodController : MonoBehaviour {
     }
 
     private void CalculateVelocity() {
-        // velocity отвечает за поворот камеры
         velocity = (smoothness * velocity + (transform.position - lastPosition)) / (1f + smoothness);
-        // это нужно, чтобы камера вращалась равномерно
         const float delta = .00025f;
         if (velocity.magnitude < delta) {
             velocity = lastVelocity;
